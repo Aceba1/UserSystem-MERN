@@ -14,6 +14,7 @@ import Login from './components/Login.js';
 import Register from './components/Register.js';
 import Button from "./components/Button.js";
 import Styles from "./utils/styles";
+import Cookies from "./utils/cookies";
 
 export default class App extends React.Component {
 
@@ -22,6 +23,8 @@ export default class App extends React.Component {
     this.state = {
       style: Styles.currentStyle
     };
+    document.cookie = "theme=dark;"
+    console.log(document.cookie);
   }
 
   render() {

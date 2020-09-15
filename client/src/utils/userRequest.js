@@ -13,7 +13,7 @@ const jsonHeaders = {
 };
 
 module.exports = {
-    loginReq: (form) => {
+    loginReq: async (form) => {
         const loginURL = `${baseURL}/user/login`
 
         let reqBody = {};
@@ -22,19 +22,37 @@ module.exports = {
         }
         console.log(reqBody);
 
-        const reqData = {
-            headers: jsonHeaders,
-            data: JSON.stringify(reqBody)
-        }
+        // const reqData = {
+        //     //headers: jsonHeaders,
+        //     data: JSON.stringify(reqBody)
+        // }
 
-        axios.put(loginURL, reqData)
-        .then( res => {
-            console.log(res);
-        })
-        .catch( err => {
-            if (err)
-                console.log(err)
-        })
+//
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", loginURL);
+        xhr.onload = () => {
+            console.log(xhr.responseText);
+        };
+        xhr.send();
+
+
+        // const response = await fetch(loginURL, {
+        //     method: "POST",
+        //     mode: "cors",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: ''//JSON.stringify(reqBody)
+        // });
+        //console.log(response.json());
+        // axios.post(loginURL, reqBody)
+        // .then( res => {
+        //     console.log(res);
+        // })
+        // .catch( err => {
+        //     if (err)
+        //         console.log(err)
+        // })
     },
 
     regReq: (form) => {
@@ -71,7 +89,7 @@ module.exports = {
             errors.push("Passwords don't match!");
         
         if (errors.length !== 0) {
-            console.log(errors)
+            console.log(errors);
         }
         else {
             const reqData = {
@@ -79,7 +97,7 @@ module.exports = {
                 data: JSON.stringify({u, e, p, p2})
             }
     
-            axios.put(loginURL, reqData)
+            axios.post(loginURL, reqData)
             .then( res => {
                 console.log(res);
             })

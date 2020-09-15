@@ -6,7 +6,7 @@ const def = {
     paddingTop: 32,
     paddingLeft: 32,
     paddingRight: 32,
-    paddingBottom: '100%',
+    paddingBottom: 'auto',
     fontFamily: 'verdana',
     height: '100%'
   },
@@ -74,7 +74,7 @@ const dark = {
 };
 
 export default class Styler {
-  static currentStyle = dark;
+  static currentStyle = light;
   static dark = dark;
   static light = light
 

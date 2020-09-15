@@ -2,6 +2,7 @@ import React from 'react'
 import Input from './Input'
 import Button from './Button'
 import PropTypes from 'prop-types'
+import Warnings from './Warnings';
 
 const formStyle = {
   margin: 16
@@ -9,55 +10,78 @@ const formStyle = {
 const titleStyle = { };
 const buttonStyle = { };
 
-function Form(props) {
-  
-  const btn_onClick = () => {
-    props.submitFunc(document.getElementById(props.id))
+
+class Form extends React.Component {
+
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    inputs: PropTypes.array.isRequired,
+    title: PropTypes.string,
+    submitFunc: PropTypes.func,
+    style: PropTypes.object,
+    titleStyle: PropTypes.object,
+    buttonStyle: PropTypes.object
   }
 
-  return (
-    <div style={{...formStyle, ...props.style}}>
+  constructor() {
+    super()
+    this.state = {
+      errors: undefined
+    }
+  }
 
-      <h2 style={{...titleStyle, ...props.titleStyle}}>
-        {props.title}
-      </h2>
+  submitClick() {
+    this.props.submitFunc(document.getElementById(this.props.id), this.setErrors);
+  }
 
-      <form id={props.id}>
-        {
-          props.inputs.map( inProps => {
-            return (
-              <Input
-                key={inProps.name}
-                name={inProps.name}
-                ph={inProps.ph}
-                type={inProps.type}
-                style={inProps.style}
-                id={inProps.id}
-                onChange={inProps.onChange}
-              />
-            );
-          })
-        }
-      </form>
+  setErrors(errors) {
+    this.setState({
+      errors
+    })
+  }
 
-      <Button
-        text='Submit'
-        style={{...buttonStyle, ...props.buttonStyle}}
-        onClick={btn_onClick}
-      />
-    </div>
-  )
+  propChanged() {
+    this.setState({errors: undefined})
+  }
+
+  render() {
+    return (
+      <div style={{...formStyle, ...this.props.style}}>
+  
+        <h2 style={{...titleStyle, ...this.props.titleStyle}}>
+          {this.props.title}
+        </h2>
+        <Warnings
+          items={this.state.errors}
+        />
+        <form id={this.props.id}>
+          {
+            this.props.inputs.map( inProps => {
+              return (
+                <Input
+                  key={inProps.name}
+                  name={inProps.name}
+                  ph={inProps.ph}
+                  type={inProps.type}
+                  style={inProps.style}
+                  id={inProps.id}
+                  onChange={this.propChanged}
+                />
+              );
+            })
+          }
+        </form>
+  
+        <Button
+          text='Submit'
+          style={{...buttonStyle, ...this.props.buttonStyle}}
+          onClick={this.submitClick}
+        />
+      </div>
+    )
+  }
 }
 
-Form.propTypes = {
-  id: PropTypes.string.isRequired,
-  inputs: PropTypes.array.isRequired,
-  title: PropTypes.string,
-  submitFunc: PropTypes.func,
-  style: PropTypes.object,
-  titleStyle: PropTypes.object,
-  buttonStyle: PropTypes.object
-}
 // Form.propTypes.inputs.arguments = {
 //     name: PropTypes.string,
 //     ph: PropTypes.string,

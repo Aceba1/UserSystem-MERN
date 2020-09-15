@@ -10,6 +10,22 @@ const def = {
     fontFamily: 'verdana',
     height: '100%'
   },
+
+  warning: {
+    display: 'block',
+    padding: 32,
+    backgroundColor: '#f444',
+    borderWidth: 4,
+    borderRadius: 4,
+    borderStyle: 'solid',
+    borderColor: '#f44'
+  },
+
+  warningItem: {
+    margin: 4,
+    fontFamily: 'verdana',
+  },
+
   button: {
     //margin: 12,
     padding: 6,
@@ -53,7 +69,11 @@ const light = {
     borderColor: '#444',
     backgroundColor: '#fff',
     color: '#000',
-  }}
+  }},
+  warning: {...def.warning, ...{
+  }},
+  warningItem: {...def.warningItem, ...{
+  }},
 };
 
 const dark = {
@@ -70,13 +90,17 @@ const dark = {
     borderColor: '#bbb',
     backgroundColor: '#000',
     color: '#fff',
-  }}
+  }},
+  warning: {...def.warning, ...{
+  }},
+  warningItem: {...def.warningItem, ...{
+  }},
 };
 
 export default class Styler {
   static currentStyle = light;
-  static dark = dark;
-  static light = light
+  dark = dark;
+  light = light
 
   // static setDark() {
   //   Styler.currentStyle = {...dark};

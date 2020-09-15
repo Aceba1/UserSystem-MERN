@@ -14,9 +14,9 @@ import Login from './components/Login.js';
 import Register from './components/Register.js';
 import Button from "./components/Button.js";
 import Styles from "./utils/styles";
-import Cookies from "./utils/cookies";
+//import Cookies from "./utils/cookies";
 
-export default class App extends React.Component {
+export default class App extends React.Component { //TODO: Create AppRouter
 
   constructor() {
     super();

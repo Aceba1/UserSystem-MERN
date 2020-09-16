@@ -28,6 +28,9 @@ class Form extends React.Component {
     this.state = {
       errors: undefined
     }
+    this.propChanged = this.propChanged.bind(this);
+    this.submitClick = this.submitClick.bind(this);
+    this.setErrors = this.setErrors.bind(this);
   }
 
   submitClick() {
@@ -36,7 +39,7 @@ class Form extends React.Component {
 
   setErrors(errors) {
     this.setState({
-      errors
+      errors: errors
     })
   }
 
@@ -51,9 +54,6 @@ class Form extends React.Component {
         <h2 style={{...titleStyle, ...this.props.titleStyle}}>
           {this.props.title}
         </h2>
-        <Warnings
-          items={this.state.errors}
-        />
         <form id={this.props.id}>
           {
             this.props.inputs.map( inProps => {
@@ -76,6 +76,9 @@ class Form extends React.Component {
           text='Submit'
           style={{...buttonStyle, ...this.props.buttonStyle}}
           onClick={this.submitClick}
+        />
+        <Warnings
+          items={this.state.errors}
         />
       </div>
     )

@@ -13,15 +13,23 @@ const def = {
 
   warning: {
     display: 'block',
-    padding: 32,
-    backgroundColor: '#f444',
-    borderWidth: 4,
+    width: 'max-content',
+    marginTop: 16,
+    marginBottom: 16,
+    paddingTop: 8,
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingBottom: 8,
+    backgroundColor: '#f314',
+    borderWidth: 2,
     borderRadius: 4,
     borderStyle: 'solid',
-    borderColor: '#f44'
+    borderColor: '#f31b'
   },
 
   warningItem: {
+    fontSize: '0.9rem',
+    fontStyle: 'italic',
     margin: 4,
     fontFamily: 'verdana',
   },
@@ -99,8 +107,8 @@ const dark = {
 
 export default class Styler {
   static currentStyle = light;
-  dark = dark;
-  light = light
+  static dark = dark;
+  static light = light
 
   // static setDark() {
   //   Styler.currentStyle = {...dark};

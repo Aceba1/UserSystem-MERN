@@ -1,13 +1,13 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+//import PropTypes from 'prop-types'
 import styles from '../utils/styles'
 
 function Warnings(props) {
-    if (props.items.length > 0)
+    if (props.items !== undefined && props.items.length > 0)
         return (
             <div style={styles.currentStyle.warning}>
                 {
-                    this.props.inputs.map( item => {
+                    props.items.map( item => {
                         return (
                             <p style={styles.currentStyle.warningItem}>
                                 {item}
@@ -18,12 +18,12 @@ function Warnings(props) {
             </div>
         )
     else 
-        return;
+        return null;
 }
 
-Warnings.propTypes = {
+// Warnings.propTypes = {
 
-}
+// }
 
 export default Warnings
 

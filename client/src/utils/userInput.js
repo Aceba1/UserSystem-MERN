@@ -1,6 +1,6 @@
 module.exports = {
   login: [
-    {name: 'email', ph: 'Enter Email', type: 'text'},
+    {name: 'credidential', ph: 'Enter Username/Email', type: 'text'},
     {name: 'password', ph: 'Enter Password', type: 'password'}
   ],
   register: [

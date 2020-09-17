@@ -32,7 +32,9 @@ export default class App extends React.Component { //TODO: Create AppRouter
           onClick={() => {Styles.currentStyle = Styles.light; this.setState({style: Styles.light});}}
           style={Styles.light.button}
         />
+        <hr/>
         <AppRouter/>
+        <hr/>
       </div>
     );
   }

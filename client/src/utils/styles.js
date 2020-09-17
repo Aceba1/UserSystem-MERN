@@ -1,14 +1,20 @@
+// TODO: Adapt styles to actual CSS, use classNames to dynamically style elements
+
 const def = {
   app: {
     display: 'block',
-    width: 'max-width',
-    margin: 0,
+    maxWidth: 500,
+    //width: 'max-width',
+    margin: 'auto',
+    marginTop: 32,
     paddingTop: 32,
     paddingLeft: 32,
     paddingRight: 32,
-    paddingBottom: 'auto',
+    paddingBottom: 32,
     fontFamily: 'verdana',
-    height: '100%'
+    height: '100%',
+    borderRadius: 16,
+    boxShadow: "0px 2px 4px 2px #444"
   },
 
   warning: {
@@ -42,7 +48,7 @@ const def = {
     borderRadius: 4,
     borderWidth: 2,
     borderStyle: 'solid',
-    
+    margin: 2,
     fontSize: '1rem',
     fontWeight: 'bold',
     cursor: 'pointer',

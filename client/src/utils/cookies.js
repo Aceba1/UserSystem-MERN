@@ -1,20 +1,37 @@
-// TODO: Make a cookie parser & manager
+// https://developer.mozilla.org/en-US/docs/web/api/document/cookie
 
-// export default class Cookies {
-//     static db = {};
-//     static init = false;
+export default class Cookies {
+    static db = {};
+    static init = false;
 
-//     static init() {
-//         for (let item in document.cookie.split('; ')) {
-//             let pair = item.split('=');
-//             Cookies.db[pair[0]] = pair[1];
-//         }
-//         console.log(db);
-//     }
+    static initialize() {
+        const arr = document.cookie.split('; ');
+        for (let i = 0; i < arr.length; i++) {
+            let pair = arr[i].split('=');
+            Cookies.db[pair[0]] = pair[1];
+        }
+        Cookies.init = true;
+    }
 
-//     static checkValue(key, def) {
-//         if (init === false)
-//             Cookies.init();
-//         //if ()
-//     }
-// }
+    static toString() {
+        return Object.keys(Cookies.db)
+            .map(key => {
+                return `${key}=${Cookies.db[key]}; SameSite=Lax`; // Must study further
+            }).join('; ');
+    }
+
+    static checkValue(cookieID, defaultValue) {
+        if (Cookies.init === false)
+            Cookies.initialize();
+        const val = Cookies.db[cookieID];
+        if (val !== undefined) return val;
+        return defaultValue;
+    }
+
+    static setValue(cookieID, value) {
+        Cookies.db[cookieID] = value;
+        // document.cookie property sets only one cookie at a time
+        document.cookie = `${cookieID}=${value}` 
+        console.log('Set ' + cookieID + ' to ' + value);
+    }
+}

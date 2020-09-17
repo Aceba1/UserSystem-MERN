@@ -6,7 +6,7 @@ import React from "react";
 import Button from "./components/Button.js";
 import Styles from "./utils/styles";
 import AppRouter from "./components/AppRouter";
-//import Cookies from "./utils/cookies";
+import Cookies from "./utils/cookies";
 
 export default class App extends React.Component { //TODO: Create AppRouter
 
@@ -15,8 +15,6 @@ export default class App extends React.Component { //TODO: Create AppRouter
     this.state = {
       style: Styles.currentStyle
     };
-    document.cookie = "theme=dark;"
-    console.log(document.cookie);
   }
 
   render() {
@@ -24,12 +22,20 @@ export default class App extends React.Component { //TODO: Create AppRouter
       <div className="App" style={this.state.style.app} >
         <Button 
           text='Set Dark'
-          onClick={() => {Styles.currentStyle = Styles.dark; this.setState({style: Styles.dark});}}
+          onClick={() => {
+            Styles.currentStyle = Styles.dark; 
+            this.setState({style: Styles.dark});
+            Cookies.setValue('theme', 'dark');
+          }}
           style={Styles.dark.button}
         />
         <Button 
           text='Set Light'
-          onClick={() => {Styles.currentStyle = Styles.light; this.setState({style: Styles.light});}}
+          onClick={() => {
+            Styles.currentStyle = Styles.light; 
+            this.setState({style: Styles.light});
+            Cookies.setValue('theme', 'light');
+          }}
           style={Styles.light.button}
         />
         <hr/>

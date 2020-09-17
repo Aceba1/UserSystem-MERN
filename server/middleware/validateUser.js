@@ -1,7 +1,7 @@
-//const User = require('../models/User');
+const User = require('../models/User');
 const bcrypt = require('bcrypt')
 
-const usernameRegex = /^\w{3,21}$/;
+const usernameRegex = /^\w+$/;
 const emailRegex = /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*$/i;
 
 const msgs = {
@@ -17,7 +17,7 @@ const msgs = {
 const validate = async (req, res, next) => {
 
     const { email: e, password: p, username: u } = req.body;
-
+    console.log(e, p, u)
     failedValues = [];
 
     if (!emailRegex.test(e)) {
@@ -27,7 +27,9 @@ const validate = async (req, res, next) => {
         })
     }
 
-    const emailInUse = false;//await User.findOne({ email: e }) != null;
+    // MongoDB
+    console.log()
+    const emailInUse = await User.findOne({ email: e }) != null;
     if (emailInUse) {
         failedValues.push({
             key: "email",
@@ -45,17 +47,18 @@ const validate = async (req, res, next) => {
     if (u == undefined || !usernameRegex.test(u)) {
         failedValues.push({
             key: "username",
-            message: msgs.legthInvalid('Username')
+            message: msgs.userChars
         })
-    } else if ( !validator.isAlphanumeric(u, 'en-US') ) {
+    } else if ( u.length < 3 || u.length > 21 ) {
 
         failedValues.push({
             key: "username",
-            message: msgs.userChars
+            message: msgs.legthInvalid('Username')
         })
     } 
-    
-    const userInUse = false;//await User.findOne({ username: u }) != null;
+
+    // MongoDB
+    const userInUse = await User.findOne({ username: u }) != null;
     if (userInUse) {
         failedValues.push({
             key: "username",
@@ -85,8 +88,8 @@ const validate = async (req, res, next) => {
             username: u,
             password: encryptedPass,
         }
+        console.log("User creation " + u + " " + e + " has passed validation!");
         next()
-
     }
 
 }

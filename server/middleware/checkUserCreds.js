@@ -17,39 +17,38 @@ module.exports = async (req, res, next) => {
     p = password.trim();
 
         const 
-        query = {}, 
-        field = emailRegex.test(c) ? 'email' : 'username'; 
+            query = {}, 
+            field = emailRegex.test(c) ? 'email' : 'username'; 
 
         query[field] = c;
 
-        // const
-        // projection = {password: 1}, 
-        // user = 
-        //     await User.findOne(
-        //         query, 
-        //         projection
-        //     ); 
+        const
+            projection = {password: 1}, 
+            user = await User.findOne(
+                    query, 
+                    projection
+                ); 
 
-        // if (user === null) {
-        //     console.error(`\nLogin Failed: '${field}' Not In Use`);
-        //     return failedLogin(req, res)    
-        // }
+        if (user === null) {
+            console.error(`\nLogin Failed: '${field}' Not In Use`);
+            return failedLogin(req, res)    
+        }
 
-        // const pass = req.body.password,
-        //       passTest = 
-        //         (pass === undefined || pass.trim() === '') 
-        //             ? false 
-        //             : await bcrypt.compare(pass, user.password);
+        const pass = req.body.password,
+              passTest = 
+                (pass === undefined || pass.trim() === '') 
+                    ? false 
+                    : await bcrypt.compare(pass, user.password);
 
-        // if (!passTest) {
-        //     console.error('\nLogin Failed: Password Invalid');
-        //     return failedLogin(req, res)    
-        // }
+        if (!passTest) {
+            console.error('\nLogin Failed: Password Invalid');
+            return failedLogin(req, res)    
+        }
 
-        //req.id = user._id;
-        /*PLACEHOLDER*/ req.id = '1234okidokie';
+        req.id = user._id;
 
 
+        console.log("User login " + user.username + " " + user.email + " has passed validation");
         next() //if code execution reaches here, it is assumed the user has successfully logged in
         
     } catch (err) {

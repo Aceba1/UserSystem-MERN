@@ -9,7 +9,7 @@ function Warnings(props) {
                 {
                     props.items.map( item => {
                         return (
-                            <p style={styles.currentStyle.warningItem}>
+                            <p key={item /*No duplicates, no problem*/ } style={styles.currentStyle.warningItem}>
                                 {item}
                             </p>
                         );

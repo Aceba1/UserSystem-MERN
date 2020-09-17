@@ -28,7 +28,7 @@ function getError(err = { validation_error: []}) {
 }
 
 module.exports = {
-    loginReq: async (form, errorFunc) => {
+    loginReq: async (form, errorFunc, history) => {
         const loginURL = `${baseURL}/user/login`
 
         const reqBody = getBody(form);
@@ -40,17 +40,28 @@ module.exports = {
 
         axios.put(loginURL, { credidential: reqBody.credidential, password: reqBody.password })
             .then( res => {
+                if (res.status === 200) {
+                    history.push('/');
+                    // Do something when login succeeds
+                }
                 console.log(res);
             })
             .catch( err => {
                 if (err) {
-                    console.log(err);
-                    errorFunc();
+                    
+                    if (err.response) {
+                        console.log(err.response.data);
+                        errorFunc(getError(err.response.data));
+                    }
+                    else {
+                        console.log(err);
+                        errorFunc([err.message]);
+                    }
                 }
             });
     },
 
-    regReq: async (form, errorFunc) => {
+    regReq: async (form, errorFunc, history) => {
         const regURL = `${baseURL}/user/register`
 
         const reqBody = getBody(form);
@@ -83,15 +94,27 @@ module.exports = {
             errorFunc(errors);
             return;
         }
+        
+        errorFunc(undefined);
 
         axios.post(regURL, { username: u, email: e, password: p })
             .then( res => {
-                console.log(res);
+                if (res.status === 201) {
+                    history.push('/');                    
+                    // Should do something for register, but what...?
+                    console.log(res);
+                }
             })
             .catch( err => {
                 if (err) {
-                    console.log(err); 
-                    errorFunc(getError(err));
+                    if (err.response) {
+                        console.log(err.response.data)
+                        errorFunc(getError(err.response.data));
+                    }
+                    else {
+                        console.log(err); 
+                        errorFunc(getError(err.message));
+                    }
                 }
             })
     }

@@ -28,7 +28,7 @@ function getError(err = { validation_error: []}) {
 }
 
 module.exports = {
-    loginReq: async (form, errorFunc, history) => {
+    loginReq: async (form, errorFunc) => {
         const loginURL = `${baseURL}/user/login`
 
         const reqBody = getBody(form);
@@ -41,7 +41,7 @@ module.exports = {
         axios.put(loginURL, { credidential: reqBody.credidential, password: reqBody.password })
             .then( res => {
                 if (res.status === 200) {
-                    history.push('/');
+                    window.location.pathname = '/';
                     // Do something when login succeeds
                 }
                 console.log(res);
@@ -100,7 +100,7 @@ module.exports = {
         axios.post(regURL, { username: u, email: e, password: p })
             .then( res => {
                 if (res.status === 201) {
-                    history.push('/');                    
+                    window.location.pathname = '/';
                     // Should do something for register, but what...?
                     console.log(res);
                 }

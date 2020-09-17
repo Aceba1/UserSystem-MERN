@@ -34,7 +34,7 @@ class Form extends React.Component {
   }
 
   submitClick() {
-    this.props.submitFunc(document.getElementById(this.props.id), this.setErrors, this.props.history);
+    this.props.submitFunc(document.getElementById(this.props.id), this.setErrors);
   }
 
   setErrors(errors) {

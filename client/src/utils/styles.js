@@ -20,6 +20,7 @@ const def = {
   warning: {
     display: 'block',
     width: 'max-content',
+    margin: 'auto',
     marginTop: 16,
     marginBottom: 16,
     paddingTop: 8,

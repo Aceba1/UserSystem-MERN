@@ -5,12 +5,13 @@ import styles from '../utils/styles'
 function Input(props) {
   return (
     <input
+    className="Input" /*{"Input "+ styles.currentStyle}*/
     placeholder={props.ph}
     type={props.type}
     onChange={props.onChange}
     name={props.name}
     id={props.id}
-    style={{...styles.currentStyle.input, ...props.style}}
+    //style={{...styles.currentStyle.input, ...props.style}}
     // placeholder, type, onChange, name, id
 
     />

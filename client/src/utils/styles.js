@@ -113,9 +113,11 @@ const dark = {
 };
 
 export default class Styler {
-  static currentStyle = light;
-  static dark = dark;
-  static light = light
+
+
+  static currentStyle = 'light';
+  static dark = 'dark';
+  static light = 'light'
 
   // static setDark() {
   //   Styler.currentStyle = {...dark};

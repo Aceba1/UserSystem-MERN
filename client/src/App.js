@@ -19,15 +19,15 @@ export default class App extends React.Component { //TODO: Create AppRouter
 
   render() {
     return (
-      <div className="App" style={this.state.style.app} >
+      <div className={"App " + this.state.style} /*style={this.state.style.app}*/ >
         <Button 
           text='Set Dark'
           onClick={() => {
             Styles.currentStyle = Styles.dark; 
             this.setState({style: Styles.dark});
             Cookies.setValue('theme', 'dark');
+            //style={Styles.light.button}
           }}
-          style={Styles.dark.button}
         />
         <Button 
           text='Set Light'
@@ -36,7 +36,7 @@ export default class App extends React.Component { //TODO: Create AppRouter
             this.setState({style: Styles.light});
             Cookies.setValue('theme', 'light');
           }}
-          style={Styles.light.button}
+          //style={Styles.light.button}
         />
         <hr/>
         <AppRouter/>

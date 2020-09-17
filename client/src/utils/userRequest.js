@@ -16,13 +16,16 @@ function getBody(form) {
     return Body;
 }
 
-function getError(err = { validation_error: []}) {
+function getError(err = { validation_error: [], message: "" }) {
     if (err.validation_error !== undefined) {
         let arr = [];
         for (let i in err.validation_error) 
             arr.push(err.validation_error[i].message)
         return arr;
     }
+
+    if (err.message !== undefined)
+        return [err.message];
     
     return [JSON.stringify(err)];
 }

@@ -26,7 +26,8 @@ class Form extends React.Component {
   constructor() {
     super()
     this.state = {
-      errors: undefined
+      errors: undefined,
+      showWarning: false
     }
     this.propChanged = this.propChanged.bind(this);
     this.submitClick = this.submitClick.bind(this);
@@ -38,20 +39,27 @@ class Form extends React.Component {
   }
 
   setErrors(errors) {
-    this.setState({
-      errors: errors
-    })
+    if (errors === undefined) {
+      this.setState({
+        showWarning: false
+      });
+    } else {
+      this.setState({
+        showWarning: true,
+        errors: errors
+      })
+    }
   }
 
   propChanged() {
-    this.setState({errors: undefined})
+    this.setErrors(undefined);
   }
 
   render() {
     return (
-      <div style={{...formStyle, ...this.props.style}}>
+      <div className={"Form"} /*style={{...formStyle, ...this.props.style}}*/>
   
-        <h2 style={{...titleStyle, ...this.props.titleStyle}}>
+        <h2>
           {this.props.title}
         </h2>
         <form id={this.props.id}>
@@ -63,7 +71,7 @@ class Form extends React.Component {
                   name={inProps.name}
                   ph={inProps.ph}
                   type={inProps.type}
-                  style={inProps.style}
+                  //style={inProps.style}
                   id={inProps.id}
                   onChange={this.propChanged}
                 />
@@ -74,11 +82,12 @@ class Form extends React.Component {
   
         <Button
           text='Submit'
-          style={{...buttonStyle, ...this.props.buttonStyle}}
+          //style={{...buttonStyle, ...this.props.buttonStyle}}
           onClick={this.submitClick}
         />
         <Warnings
           items={this.state.errors}
+          showWarning={this.state.showWarning}
         />
       </div>
     )

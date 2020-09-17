@@ -1,4 +1,193 @@
 body {
     color: #666;
     background-color: #666;
+    font-family: verdana;
+}
+
+.App {
+    transition: background-color linear 100ms;
+    display: block;
+    max-width: 500px;
+    /* width: max-width; */
+    font-family: verdana;
+    margin: auto;
+    margin-top: 32px;
+    padding-top: 32px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 32px;
+    height: 100%;
+    border-radius: 16px;
+    font-family: verdana;
+    box-shadow: 0px 2px 4px 2px #444;
+}
+
+/** Combine .theme.App to have it check for both in the same element**/
+.light.App {
+    background-color: #fff;
+    color: #222
+}
+.dark.App {
+    background-color: #000;
+    color: #ddd;
+}
+
+/** Add a space to have it look for styling theme in the parent **/
+.light h1 {
+    color: #000;
+}
+.dark h1 {
+    color: #fff;
+}
+
+.light h2 {
+    color: #111;
+}
+.dark h2 {
+    color: #eee;
+}
+
+.Warning {
+    transition: 250ms ease-in-out;
+    /* animation: 200ms ease-out 0s 1 alternate both running warning-appear;  */
+    display: block;
+    width: max-content;
+    margin: auto;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding-top: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 8px;
+    background-color: #f314;
+    border-width: 2px;
+    border-radius: 4px;
+    border-style: solid;
+    border-color: #f31b;
+}
+
+.Warning.popup-rise {
+    transition: 250ms ease-in-out;
+    transform: translateY(0);
+}
+.Warning.popup-fall {
+    transition: 250ms ease-in-out;
+    opacity: 0;
+    margin-top: -32px;
+    transform: translateY(20px);
+}
+
+.WarningItem {
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 4px;
+    font-family: verdana;
+}
+
+.popup-fall .WarningItem {
+    transition: 250ms ease-in-out;
+    transform: scaleY(0);
+    margin: -0.9rem 4px;
+}
+
+/* .light .WarningItem {
+}
+.dark .WarningItem {
+} */
+
+.Button {
+    /* margin: 12px; */
+    transition: linear 50ms;
+    margin: 2px;
+    padding: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 4px;
+    border-width: 2px;
+    border-style: solid;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: verdana
+}
+.light .Button {
+    border-color: #000;
+    background-color: #eee;
+    color: #222;
+}
+.dark .Button {
+    border-color: #ddd;
+    background-color: #222;
+    color: #eee;
+}
+
+.Button:hover {
+    transition: linear 50ms;
+    transform:translateY(-2px);
+    box-shadow: 0px 2px 3px 0px #ccc9;
+}
+.light .Button:hover {
+    border-color: #222;
+    background-color: #fff;
+    color: #000;
+}
+.dark .Button:hover {
+    border-color: #fff;
+    background-color: #333;
+    color: #fff;
+}
+
+.Button:active {
+    transform:translateY(-1px);
+    box-shadow: 0px 1px 2px 1px #ccc9;
+}
+.light .Button:active {
+    border-color: #000;
+    background-color: #eee;
+    color: #000;
+}
+.dark .Button:active {
+    border-color: #fff;
+    background-color: #222;
+    color: #fff;
+}
+
+.Input {
+    transition: background-color linear 50ms;
+    display: block;
+    margin: 12px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+    font-family: verdana
+}
+.light .Input {
+    border-color: #444;
+    background-color: #fff;
+    color: #000;
+}
+.dark .Input {
+    border-color: #bbb;
+    background-color: #000;
+    color: #fff;
+}
+
+.Input:hover {
+    transition: transform linear 50ms;
+    transform:translateX(2px);
+}
+.light .Input:hover {
+    border-color: #222;
+}
+.dark .Input:hover {
+    border-color: #ddd;
+}
+
+.Input:focus {
+    border-width: 2px;
+    
+    padding: 5px 9px;
+    transform:translateX(2px);
 }

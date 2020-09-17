@@ -3,22 +3,22 @@ import React from 'react'
 import styles from '../utils/styles'
 
 function Warnings(props) {
-    if (props.items !== undefined && props.items.length > 0)
-        return (
-            <div style={styles.currentStyle.warning}>
-                {
+    const show = (props.items !== undefined && props.items.length > 0);
+
+    return (
+        <div className={"Warning " + (props.showWarning ? "popup-rise" : "popup-fall")}/*style={styles.currentStyle.warning}*/>
+            {
+                show ? 
                     props.items.map( item => {
                         return (
-                            <p key={item /*No duplicates, no problem*/ } style={styles.currentStyle.warningItem}>
+                            <p key={item /*No duplicates, no problem*/ } className="WarningItem" /*style={styles.currentStyle.warningItem}*/>
                                 {item}
                             </p>
-                        );
-                    })
-                }
-            </div>
-        )
-    else 
-        return null;
+                        ); 
+                    }) :  null
+            }
+        </div>
+    )
 }
 
 // Warnings.propTypes = {

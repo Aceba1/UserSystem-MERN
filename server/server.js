@@ -1,10 +1,10 @@
+// Loads the secret 
 require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require('cors');
-//const MongoClient = require('mongodb').MongoClient;
 const userRouter = require('./userRouter');
 
 
@@ -25,18 +25,17 @@ app.use((req, res, next) => {
 // Routers
 app.use('/user', userRouter);
 
-// ENV CONTANTS
+// ENV CONSTANTS
 const 
     PORT = process.env.PORT || 4000, //Port number for server to listen on, defined in enviorment file
     URI = process.env.MONGO; // URI that gives read/write access to database, this need to be stored in an env so that the public can not read/write your database without going through your API
 
-// Connect to Data-Base
-
+// Connect to DataBase
 mongoose.connect(URI, { useUnifiedTopology: true, useNewUrlParser: true })
     .then(res => {
         console.log('Connected to DB!');
         
-        // listen for requests, only after connecting to DB
+        // Listen for access requests ONLY after connecting to DB
         app.listen(PORT);
     })
     .catch(err => {

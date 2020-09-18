@@ -10,7 +10,6 @@ router.post('/register',
     validateUser, 
     addUser,
     async (req, res) => {
-        console.log(req.body);
         try {
             //req.userData is defined by the validation middleware
             //const newUser = await User.create(req.userData);

@@ -13,6 +13,8 @@ const addUser = async (req, res, next) => {
             console.log(product);
         }
     })
+    req.id = user._id;
+    req.user = user.username;
     next();
 }
 module.exports = addUser;

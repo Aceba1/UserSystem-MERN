@@ -44,10 +44,12 @@ module.exports = {
         axios.put(loginURL, { credidential: reqBody.credidential, password: reqBody.password })
             .then( res => {
                 if (res.status === 200) {
-                    window.location.pathname = '/';
                     // Do something when login succeeds
+                    localStorage.setItem("token", res.data.token);
+                    localStorage.setItem("user", res.data.user);
+                    console.log(res.data);
+                    window.location.pathname = '/';
                 }
-                console.log(res);
             })
             .catch( err => {
                 if (err) {
@@ -103,9 +105,11 @@ module.exports = {
         axios.post(regURL, { username: u, email: e, password: p })
             .then( res => {
                 if (res.status === 201) {
+                    // Do something when login succeeds
+                    localStorage.setItem("token", res.data.token);
+                    localStorage.setItem("user", res.data.user);
+                    console.log(res.data);
                     window.location.pathname = '/';
-                    // Should do something for register, but what...?
-                    console.log(res);
                 }
             })
             .catch( err => {

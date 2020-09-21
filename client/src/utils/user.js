@@ -39,8 +39,7 @@ export default class User {
           }
       })
       .catch(err => {
-        if (err) console.log(err);
-        failedEvent(err.message);
+        failedEvent(err.response);
         User.loggedIn = false; 
         User.user = '';
         localStorage.removeItem("token");

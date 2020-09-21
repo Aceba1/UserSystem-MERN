@@ -13,7 +13,7 @@ export default function Register(props) {
           id='register-form'
           title='Create an account'
           inputs={register}
-          submitFunc={ regReq }
+          submitFunc={regReq}
         />
         { props.loggedIn ? (
           <div>

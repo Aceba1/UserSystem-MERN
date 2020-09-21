@@ -13,7 +13,7 @@ export default function Login(props) {
           id='login-form'
           title='Enter your login information'
           inputs={login}
-          submitFunc={ loginReq }
+          submitFunc={loginReq}
         />
         { props.loggedIn ? (
           <div>

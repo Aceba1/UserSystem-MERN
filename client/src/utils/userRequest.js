@@ -45,7 +45,10 @@ module.exports = {
             .then( res => {
                 if (res.status === 200) {
                     // Do something when login succeeds
-                    localStorage.setItem("token", res.data.token);
+
+                    // By keeping in localStorage, programmer needs to add token to requests
+                    // Contrary to cookies, which is added to every server request
+                    localStorage.setItem("token", res.data.token); // Move to Cookies! (Add expiration as well)
                     localStorage.setItem("user", res.data.user);
                     console.log(res.data);
                     window.location.pathname = '/';
@@ -106,7 +109,7 @@ module.exports = {
             .then( res => {
                 if (res.status === 201) {
                     // Do something when login succeeds
-                    localStorage.setItem("token", res.data.token);
+                    localStorage.setItem("token", res.data.token); // Move to Cookies!
                     localStorage.setItem("user", res.data.user);
                     console.log(res.data);
                     window.location.pathname = '/';

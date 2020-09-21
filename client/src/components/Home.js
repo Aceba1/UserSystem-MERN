@@ -5,7 +5,6 @@ import User from '../utils/user';
 /*window.location.origin*/ 
 
 export default function Home(props) {
-  console.log(props);
   if (props.loggedIn) {
     return (
       <div>

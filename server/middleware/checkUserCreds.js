@@ -13,7 +13,8 @@ module.exports = async (req, res, next) => {
     
     const { credidential, password, token } = req.body;
 
-    if (token) {
+    // Token can go in server cookies, 'auth header'
+    if (token) { // Could separate to new middleware (server), and tasked only when necessary (client)
       try {
         const {id} = jwt.verify(token, process.env.JWT_SECRET, {}); // Throws an exception if the token is invalid
         

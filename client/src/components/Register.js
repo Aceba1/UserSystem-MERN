@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from './Button'
 import Form from './Form'
-import userInput from '../utils/userInput'
+import { register } from '../utils/userInput'
 import { regReq } from '../utils/userRequest'
 
 
@@ -13,7 +13,7 @@ export default function Register() {
         <Form
           id='register-form'
           title='Create an account'
-          inputs={userInput.register}
+          inputs={register}
           submitFunc={ regReq }
         />
         

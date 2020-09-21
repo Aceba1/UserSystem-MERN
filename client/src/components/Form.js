@@ -4,20 +4,19 @@ import Button from './Button'
 import PropTypes from 'prop-types'
 import Warnings from './Warnings';
 
-const formStyle = {
-  margin: 16
-};
-const titleStyle = { };
-const buttonStyle = { };
-
-
 class Form extends React.Component {
 
   static propTypes = {
     id: PropTypes.string.isRequired,
-    inputs: PropTypes.array.isRequired,
+    inputs: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        ph: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        id: PropTypes.string
+      })).isRequired,
     title: PropTypes.string,
-    submitFunc: PropTypes.func,
+    submitFunc: PropTypes.func.isRequired,
     style: PropTypes.object,
     titleStyle: PropTypes.object,
     buttonStyle: PropTypes.object
@@ -93,15 +92,6 @@ class Form extends React.Component {
     )
   }
 }
-
-// Form.propTypes.inputs.arguments = {
-//     name: PropTypes.string,
-//     ph: PropTypes.string,
-//     type: PropTypes.string,
-//     style: PropTypes.string,
-//     id: PropTypes.string,
-//     onChange: PropTypes.func
-// }
 
 export default Form
 

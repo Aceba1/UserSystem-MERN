@@ -1,4 +1,6 @@
 // https://developer.mozilla.org/en-US/docs/web/api/document/cookie
+// Cookies are primarily for communication with SERVER, for all CLIENT storage use localStorage!
+
 
 export default class Cookies {
     static db = {};

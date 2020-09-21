@@ -4,6 +4,21 @@ body {
     font-family: verdana;
 }
 
+.Form {
+    margin: 16px;
+    margin-bottom: 32px;
+}
+
+.phantom-label {
+    position: absolute;
+    font-style: italic;
+    color: #888;
+    margin-left: 4px;
+    margin-top: 4px;
+    font-size: 12px;
+    text-align: center;
+}
+
 .App {
     transition: background-color linear 100ms;
     display: block;

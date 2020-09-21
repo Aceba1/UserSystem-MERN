@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from '../utils/styles'
+//import styles from '../utils/styles'
 
 function Input(props) {
   return (

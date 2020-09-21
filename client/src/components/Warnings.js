@@ -1,6 +1,6 @@
 import React from 'react'
-//import PropTypes from 'prop-types'
-import styles from '../utils/styles'
+import PropTypes from 'prop-types'
+//import styles from '../utils/styles'
 
 function Warnings(props) {
     const show = (props.items !== undefined && props.items.length > 0);
@@ -19,11 +19,12 @@ function Warnings(props) {
             }
         </div>
     )
-}
+};
 
-// Warnings.propTypes = {
-
-// }
+Warnings.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.string),
+    showWarning: PropTypes.bool
+};
 
 export default Warnings
 

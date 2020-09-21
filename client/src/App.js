@@ -67,6 +67,7 @@ export default class App extends React.Component { //TODO: Create AppRouter
         <hr/>
         <AppRouter user={User.user} loggedIn={User.loggedIn}/>
         <hr/>
+      <label className='phantom-label'>{User.loggedIn ? 'Logged in as ' + User.user : ''}</label>
       </div>
     );
   }

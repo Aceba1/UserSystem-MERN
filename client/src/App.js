@@ -6,7 +6,7 @@ import React from "react";
 import Button from "./components/Button.js";
 import Styles from "./utils/styles";
 import AppRouter from "./components/AppRouter";
-import Cookies from "./utils/cookies";
+//import Cookies from "./utils/cookies";
 
 export default class App extends React.Component { //TODO: Create AppRouter
 

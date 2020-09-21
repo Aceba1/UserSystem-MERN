@@ -4,8 +4,7 @@ import Form from './Form'
 import { register } from '../utils/userInput'
 import { regReq } from '../utils/userRequest'
 
-
-export default function Register() {
+export default function Register(props) {
   return (
     <div>
       <h1>Register</h1>
@@ -16,12 +15,23 @@ export default function Register() {
           inputs={register}
           submitFunc={ regReq }
         />
-        
-        <label>Already have an account?</label><br/>
-        <Button 
-          text='Login' 
-          onClick={() => { window.location = '/login' }} 
-        />
+        { props.loggedIn ? (
+          <div>
+            <label>Already signed in!</label><br/>
+            <Button 
+            text='Return Home' 
+            onClick={() => { window.location = '/' }} 
+            />
+          </div>
+        ) : (
+          <div>
+          <label>Already have an account?</label><br/>
+            <Button 
+              text='Login' 
+              onClick={() => { window.location = '/login' }} 
+            />
+          </div>
+        )}
       </div>
     </div>
   )

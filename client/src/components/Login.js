@@ -4,7 +4,7 @@ import Form from './Form'
 import { login } from '../utils/userInput'
 import { loginReq } from '../utils/userRequest'
 
-export default function Login() {
+export default function Login(props) {
   return (
     <div>
       <h1>Login</h1>
@@ -15,12 +15,23 @@ export default function Login() {
           inputs={login}
           submitFunc={ loginReq }
         />
-
-        <label>No account?</label><br/>
-        <Button 
-          text='Register' 
-          onClick={() => { window.location = '/register' }} 
-        />
+        { props.loggedIn ? (
+          <div>
+            <label>Already signed in!</label><br/>
+            <Button 
+            text='Return Home' 
+            onClick={() => { window.location = '/' }} 
+            />
+          </div>
+        ) : (
+          <div>
+            <label>No account?</label><br/>
+            <Button 
+              text='Register' 
+              onClick={() => { window.location = '/register' }} 
+            />
+          </div>
+        )}
       </div>
     </div>
   )

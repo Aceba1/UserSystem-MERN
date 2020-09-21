@@ -9,19 +9,19 @@ import {
 } from "react-router-dom";
 
 export default function AppRouter(props) {
-    return (
-        <Router>
-          <Switch>
-            <Route path="/login">
-              <Login user={props.user} loggedIn={props.loggedIn}/>
-            </Route>
-            <Route path="/register">
-              <Register user={props.user} loggedIn={props.loggedIn}/>
-            </Route>
-            <Route path="/">
-              <Home user={props.user} loggedIn={props.loggedIn}/>
-            </Route>
-          </Switch>
-        </Router>
-    )
+  return (
+    <Router>
+      <Switch>
+        <Route path="/login">
+          <Login user={props.user} loggedIn={props.loggedIn}/>
+        </Route>
+        <Route path="/register">
+          <Register user={props.user} loggedIn={props.loggedIn}/>
+        </Route>
+        <Route path="/">
+          <Home user={props.user} loggedIn={props.loggedIn}/>
+        </Route>
+      </Switch>
+    </Router>
+  )
 }

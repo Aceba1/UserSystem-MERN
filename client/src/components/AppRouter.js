@@ -5,23 +5,21 @@ import Register from './Register.js';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  // Link
+  Route
 } from "react-router-dom";
 
-export default function AppRouter() {
+export default function AppRouter(props) {
     return (
-        
         <Router>
           <Switch>
             <Route path="/login">
-              <Login />
+              <Login user={props.user} loggedIn={props.loggedIn}/>
             </Route>
             <Route path="/register">
-              <Register />
+              <Register user={props.user} loggedIn={props.loggedIn}/>
             </Route>
             <Route path="/">
-              <Home />
+              <Home user={props.user} loggedIn={props.loggedIn}/>
             </Route>
           </Switch>
         </Router>

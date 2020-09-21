@@ -65,7 +65,7 @@ export default class App extends React.Component { //TODO: Create AppRouter
           onClick={this.setThemeLight}
         />
         <hr/>
-        <AppRouter/>
+        <AppRouter user={User.user} loggedIn={User.loggedIn}/>
         <hr/>
       </div>
     );

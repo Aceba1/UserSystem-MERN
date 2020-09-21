@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // Could move AppRouter to new file, keep App.js clean
 
 //import logo from './logo.svg';
@@ -10,65 +10,86 @@ import AppRouter from "./components/AppRouter";
 import Warnings from "./components/Warnings.js";
 import User from './utils/user';
 
-export default class App extends React.Component { //TODO: Create AppRouter
+// Move hooks to utils! 'use<State>.js'
 
-  constructor() {
-    super();
-    this.state = {
-      style: Styles.currentStyle,
-      siteErrors: [],
-      showSiteError: false
-    };
-    this.setThemeLight = this.setThemeLight.bind(this);
-    this.setThemeDark = this.setThemeDark.bind(this);
-    this.loginSuccess = this.loginSuccess.bind(this);
-    this.failedToLogin = this.failedToLogin.bind(this);
-  }
-  
-  componentDidMount() {
-    User.verifyLoggedIn(this.loginSuccess, this.failedToLogin); // Can add TrueEvent and FalseEvent here
-  }
-
-  loginSuccess() {
-    console.log('Logged in as ' + User.user + '!');
-  }
-
-  failedToLogin(error = '') {
-    this.setState({
-      siteErrors: [error, 'Please log back in'],
-      showSiteError: true
-    })
-  }
-
-  setThemeLight() { this.setTheme(Styles.light) }
-  setThemeDark() { this.setTheme(Styles.dark) }
-
-  setTheme(theme) {
+function useTheme() {
+  const [theme, setTheme] = useState(Styles.currentStyle);
+  useEffect(() => {
     localStorage.setItem('theme', theme);
-    Styles.currentStyle = theme; 
-    this.setState({style: theme});
-  }
+    Styles.currentStyle = theme;
+  }, [theme]);
+  return [theme, setTheme];
+}
 
-  render() {
-    return (
-      <div id='App' className={"App " + this.state.style} /*style={this.state.style.app}*/ >
-        <Warnings 
-          items={this.state.siteErrors}
-          showWarning={this.state.showSiteError}
-        />
-        <Button 
-          text='Set Dark'
-          onClick={this.setThemeDark}
-        />
-        <Button 
-          text='Set Light'
-          onClick={this.setThemeLight}
-        />
-        <hr/>
-        <AppRouter user={User.user} loggedIn={User.loggedIn}/>
-        <hr/>
-      <label className='phantom-label'>{User.loggedIn ? 'Logged in as ' + User.user : ''}</label>
-      </div>
-    );
-  }
+function useSiteErrors() {
+  const [siteErrors, setSiteErrors] = useState();
+  const [showSiteError, setShowSiteError] = useState(false);
+
+  useEffect(() => {
+    setShowSiteError(siteErrors !== undefined);
+  }, [siteErrors]);
+  return [siteErrors, showSiteError, setSiteErrors, setShowSiteError];
+}
+
+function useLogin(setSiteErrors = () => {}) {
+  const [userName, setUserName] = useState(User.user);
+  const [userLoggedIn, setUserLoggedIn] = useState(User.loggedIn);
+
+  useEffect(() => {
+    User.verifyLoggedIn(() => {
+      setUserName(User.user);
+      setUserLoggedIn(true);
+      console.log('Logged in!');
+    }, err => {
+      setSiteErrors(["Failed to keep session! Please log back in.", "Error: " + err.data.message ]);
+      setUserName('');
+      setUserLoggedIn(false);
+      console.log('Failed to log in!');
+    })
+  }, [setSiteErrors]);
+
+  return [userName, userLoggedIn];
+}
+
+const windowPath = JSON.stringify(window.location.pathname);
+const _pageViewNum = 1 + (JSON.parse(localStorage.getItem(windowPath))) ?? 0;
+    localStorage.setItem(windowPath, _pageViewNum);
+
+function useCounter() {
+  const [counter, setCounter] = useState(_pageViewNum);
+
+  const clearCounter = () => { setCounter(0); localStorage.removeItem(windowPath) }
+  return [counter, clearCounter];
+}
+
+export default function App() {
+  const [theme, setTheme] = useTheme();
+  const [siteErrors, showSiteError, setSiteErrors, setShowSiteError] = useSiteErrors();
+  const [userName, userLoggedIn] = useLogin(setSiteErrors);
+  const [pageCount, clearCounter] = useCounter();
+
+  return (
+    <div id='App' className={"App " + theme} /*style={this.state.style.app}*/ >
+      <Warnings 
+        items={siteErrors}
+        showWarning={showSiteError}
+        classStyle="top"
+        hideWarning={() => {setShowSiteError(false)}}
+        showHideButton={true}
+      />
+      <Button 
+        text='Set Dark'
+        onClick={() => {setTheme(Styles.dark)}}
+      />
+      <Button 
+        text='Set Light'
+        onClick={() => {setTheme(Styles.light)}}
+      />
+      <hr/>
+      <AppRouter user={userName} loggedIn={userLoggedIn}/>
+      <hr/>
+    <label className='phantom-label right clickable' onClick={clearCounter} >{'View count: ' + pageCount}</label>
+    <label className='phantom-label'>{userLoggedIn ? 'Logged in as ' + userName : ''}</label>
+    </div>
+  );
 }

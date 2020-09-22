@@ -11,7 +11,7 @@ function Warnings(props) {
         typeof props.items === "string" ? ( <p>{props.items}</p> ) : (show ? 
           props.items.map( item => {
             return (
-              <p key={item /*No duplicates, no problem*/ } className="WarningItem" /*style={styles.currentStyle.warningItem}*/>
+              <p key={item /*No duplicates, no problem*/ } className="WarningItem">
                 {item}
               </p>
             ); 

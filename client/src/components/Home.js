@@ -2,8 +2,6 @@ import React from 'react'
 import Button from './Button'
 import User from '../utils/user';
 
-/*window.location.origin*/ 
-
 export default function Home(props) {
   if (props.loggedIn) {
     return (

@@ -114,6 +114,10 @@
 
 export default class Styler {
 
+  static setCurrentStyle(value) {
+    document.body.className = value;
+    this.currentStyle = value;
+  }
 
   static currentStyle = 'light';
   static dark = 'dark';

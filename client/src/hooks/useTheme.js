@@ -6,7 +6,7 @@ export default function useTheme() {
   const [theme, setTheme] = useState(Styles.currentStyle);
   useEffect(() => {
     localStorage.setItem('theme', theme);
-    Styles.currentStyle = theme;
+    Styles.setCurrentStyle(theme);
   }, [theme]);
   return [theme, setTheme];
 }

@@ -2,15 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import './index.css';
 import App from './App';
-//import * as serviceWorker from './serviceWorker';
 import Styler from './utils/styles';
-//import Cookies from './utils/cookies';
 import User from './utils/user';
+
+// Initialize client
+
 User.initialize();
 
-if (localStorage.getItem('theme') === 'dark') {
-  Styler.currentStyle = Styler.dark;
+const theme = localStorage.getItem('theme');
+if (theme) {
+  Styler.setCurrentStyle(theme);
 }
+
+
+// Render client
 
 ReactDOM.render(
   <React.StrictMode> {/*React.StrictMode : Error-catcher*/}

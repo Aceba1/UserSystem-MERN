@@ -1,7 +1,18 @@
 body {
-    color: #666;
-    background-color: #666;
+    /* background-color: #666; */
+    background-image: linear-gradient(to left, #666, #444, #666);
+    /* transition: background-color 250ms linear; */
     font-family: verdana;
+    height:100%;
+}
+
+body.dark {
+    background-image: linear-gradient(to left, #555, #444, #555);
+    color: #ddd;
+}
+body.light {
+    background-image: linear-gradient(to left, #888, #777, #888);
+    color: #222;
 }
 
 .Form {
@@ -29,13 +40,12 @@ body {
 }
 
 .App {
-    transition: background-color linear 100ms;
+    transition: background-color linear 150ms;
     display: block;
     max-width: 500px;
     /* width: max-width; */
     font-family: verdana;
-    margin: auto;
-    margin-top: 32px;
+    margin: 32px auto;
     padding-top: 32px;
     padding-left: 32px;
     padding-right: 32px;

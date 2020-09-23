@@ -1,8 +1,8 @@
 import React from "react";
 //import logo from './logo.svg';
 //import './App.css';
-import Button from "./components/Button";
-import Styles from "./utils/styles";
+
+import ThemeController from "./components/ThemeController";
 import AppRouter from "./components/AppRouter";
 import Warnings from "./components/Warnings";
 
@@ -26,14 +26,7 @@ export default function App() {
         hideWarning={() => {setShowSiteError(false)}}
         showHideButton={true}
       />
-      <Button 
-        text='Set Dark'
-        onClick={() => {setTheme(Styles.dark)}}
-      />
-      <Button 
-        text='Set Light'
-        onClick={() => {setTheme(Styles.light)}}
-      />
+      <ThemeController theme={theme} setTheme={setTheme}/>
       <hr/>
       <AppRouter user={userName} loggedIn={userLoggedIn}/>
       <hr/>

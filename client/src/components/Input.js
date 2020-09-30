@@ -10,6 +10,7 @@ function Input(props) {
     onChange={props.onChange}
     name={props.name}
     id={props.id}
+    value={props.save ? props.value : undefined}
     />
   )
 }

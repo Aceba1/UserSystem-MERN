@@ -8,13 +8,13 @@ const baseURL  = 'http://localhost:4000';
 const usernameRegex = /^\w*$/;
 const emailRegex = /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*$/i;
 
-function getBody(form) {
-    let Body = {};
-    for (const input of form) {
-        Body[input.name] = input.value;
-    }
-    return Body;
-}
+// function getBody(form) {
+//     let Body = {};
+//     for (const input of form) {
+//         Body[input.name] = input.value;
+//     }
+//     return Body;
+// }
 
 function getError(err = { validation_error: [], message: "" }) {
     if (err.validation_error !== undefined) {
@@ -31,10 +31,10 @@ function getError(err = { validation_error: [], message: "" }) {
 }
 
 module.exports = {
-    loginReq: async (form, errorFunc) => {
+    loginReq: async (reqBody, errorFunc) => {
         const loginURL = `${baseURL}/user/login`
 
-        const reqBody = getBody(form);
+        //const reqBody = getBody(form);
         
         if (reqBody.credidential === '' || reqBody.password === '') {
             errorFunc(['Empty Email or Password!']);
@@ -69,10 +69,10 @@ module.exports = {
             });
     },
 
-    regReq: async (form, errorFunc, history) => {
+    regReq: async (reqBody, errorFunc, history) => {
         const regURL = `${baseURL}/user/register`
 
-        const reqBody = getBody(form);
+        //const reqBody = getBody(form);
 
         const errors = [];
         const {username: u, email: e, password: p, password2: p2} = reqBody;

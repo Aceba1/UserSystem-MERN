@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from './Button'
-import User from '../utils/user';
+import User from '../utils/userLogin';
 
 export default function Home(props) {
   if (props.loggedIn) {

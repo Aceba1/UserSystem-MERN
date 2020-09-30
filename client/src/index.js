@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 //import './index.css';
 import App from './App';
 import Styler from './utils/styles';
-import User from './utils/user';
+import User from './utils/userLogin';
 
 // Initialize client
 

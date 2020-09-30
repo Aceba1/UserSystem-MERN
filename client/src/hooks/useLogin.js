@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import User from '../utils/user'
+import User from '../utils/userLogin'
 
 // Change this in the future: Should only need to verify logged in state when doing authorized requests
 

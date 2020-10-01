@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from './Button'
 import User from '../utils/userLogin';
+import Game from './Game';
 
 export default function Home(props) {
   if (props.loggedIn) {
@@ -9,6 +10,7 @@ export default function Home(props) {
         <h1>Home</h1>
         <p>Welcome back, {props.user}!</p>
         <div>
+          <Game />
           <Button text='Logout' onClick={() => { User.logOut(); window.location = '/' }} />
         </div>
       </div>

@@ -115,6 +115,8 @@ class Snake {
   }
 
   setDirection(dir) {
+    if ((this.direction + 6) % 4 === dir) // Invert check
+      return;
     if (this.nextDirection === -1)
       this.direction = dir;
     this.nextDirection = dir;

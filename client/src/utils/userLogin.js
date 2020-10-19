@@ -1,4 +1,5 @@
 const {default: axios} = require('axios');
+const {get, set} = require('../utils/localStorage');
 const baseURL  = 'http://localhost:4000';
 const loginURL = `${baseURL}/user/login`
 
@@ -11,11 +12,11 @@ export default class User {
   }
 
   static loggedIn = false;
-  static user = ''
+  static user = {}
 
   static initialize() {
     User.loggedIn = localStorage.getItem('token') != null;
-    User.user = User.loggedIn ? localStorage.getItem('user') : '';
+    User.user = User.loggedIn ? get('user') : '';
   }
 
   static verifyLoggedIn(successEvent = () => {}, failedEvent = (err) => {}) {
@@ -28,7 +29,7 @@ export default class User {
             User.loggedIn = true;
             User.user = res.data.user;
             localStorage.setItem("token", res.data.token);
-            localStorage.setItem("user", res.data.user);
+            set("user", res.data.user);
             successEvent();
           } else {
             failedEvent(res.response);

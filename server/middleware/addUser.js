@@ -14,7 +14,7 @@ const addUser = async (req, res, next) => {
         }
     })
     req.id = user._id;
-    req.user = user.username;
+    req.user = {name: user.username, email: user.email};
     next();
 }
 module.exports = addUser;

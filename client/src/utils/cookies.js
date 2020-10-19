@@ -18,7 +18,7 @@ export default class Cookies {
     static toString() {
         return Object.keys(Cookies.db)
             .map(key => {
-                return `${key}=${Cookies.db[key]}; SameSite=Lax`; // Must study further
+                return `${key}=${Cookies.db[key]}; sameSite=Lax`; // Must study further
             }).join('; ');
     }
 
@@ -33,7 +33,7 @@ export default class Cookies {
     static setValue(cookieID, value) {
         Cookies.db[cookieID] = value;
         // document.cookie property sets only one cookie at a time
-        document.cookie = `${cookieID}=${value}` 
+        document.cookie = `${cookieID}=${value};` 
         console.log('Set ' + cookieID + ' to ' + value);
     }
 }

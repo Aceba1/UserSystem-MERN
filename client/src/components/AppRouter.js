@@ -8,18 +8,18 @@ import {
   Route
 } from "react-router-dom";
 
-export default function AppRouter(props) {
+export default function AppRouter() {
   return (
     <Router>
       <Switch>
         <Route path="/login">
-          <Login user={props.user} loggedIn={props.loggedIn}/>
+          <Login/>
         </Route>
         <Route path="/register">
-          <Register user={props.user} loggedIn={props.loggedIn}/>
+          <Register/>
         </Route>
         <Route path="/">
-          <Home user={props.user} loggedIn={props.loggedIn}/>
+          <Home/>
         </Route>
       </Switch>
     </Router>

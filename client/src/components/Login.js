@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Button from './Button'
 import Form from './Form'
-import { login } from '../utils/userInput'
-import { loginReq } from '../utils/userRequest'
+import { login as loginInput } from '../utils/userInput'
+import { login as loginReq } from '../utils/userRequest'
+import { UserState } from '../contexts/UserState';
 
 export default function Login(props) {
+  const userState = useContext(UserState);
   return (
     <div>
       <h1>Login</h1>
@@ -12,10 +14,10 @@ export default function Login(props) {
         <Form
           id='login-form'
           title='Enter your login information'
-          inputs={login}
-          submitFunc={loginReq}
+          inputs={loginInput}
+          request={loginReq}
         />
-        { props.loggedIn ? (
+        { userState.active ? (
           <div>
             <label>Already signed in!</label><br/>
             <Button 

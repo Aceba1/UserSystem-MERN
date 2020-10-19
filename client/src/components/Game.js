@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import Styles from '../utils/styles';
+import React, { useContext, useEffect, useState } from 'react'
+import {Theme} from '../contexts/Theme';
 
 /**
  * @type {{
@@ -12,12 +12,25 @@ import Styles from '../utils/styles';
  *  } snake
  */
 class Snake {
-  constructor() {
-    this.init();
-    window.addEventListener('keydown', (event) => {this.onKeydown(event)}, false); // Handle input
 
-    setInterval(() => {this.onInterval()}, 75); // Game update interval
+  constructor() {
+    this.theme = 'light';
+    this.init();
+    this.callbackKey = (event) => {this.onKeydown(event)};
+    this.callbackInt = () => {this.onInterval()};
+    this.restart();
   }
+
+  stop() {
+    window.removeEventListener('keydown', this.callbackKey, false); // Stop handling input
+    clearInterval(this.intervalHandle); // Stop update interval
+  }
+
+  restart() {
+    window.addEventListener('keydown', this.callbackKey, false); // Handle input
+    this.intervalHandle = setInterval(this.callbackInt, 75); // Game update interval
+  }
+
 
   init() { // Initialize here, convenient for reset
     this.body = [{x: 0, y: 0}, {x: 0, y: 0}, {x: 0, y: 0}]; // The snake
@@ -54,6 +67,11 @@ class Snake {
         return;
     }
     var c = document.getElementById("game");
+    if (!c) {
+      console.warn('Canvas vanished! Stopping game...');
+      this.stop();
+      return;
+    }
     /**
      * @type {CanvasRenderingContext2D}
      */
@@ -84,7 +102,7 @@ class Snake {
       this.direction = this.nextDirection;
       this.nextDirection = -1;
     }
-    const light = Styles.currentStyle === 'light';
+    const light = this.theme === 'light';
 
     ctx.fillStyle = light ? 'white' : 'black';
     ctx.fillRect(0, 0, 300, 150);
@@ -140,14 +158,32 @@ class Snake {
   }
 }
 
+/**
+ * @type {Snake} It's a snake
+ */
+let snake;
+
 export default function Game() {
   const [running, setRunning] = useState(false);
   useEffect(() => {
-    if (running) new Snake();
-  }, [running])
+    if (running) {
+      if (snake) snake.restart();
+      else snake = new Snake();
+    }
+    else 
+      snake.stop();
+  }, [running]);
+  const theme = useContext(Theme);
+  useEffect(() => {
+    if (snake) snake.theme = theme.theme;
+    console.log('Set snake theme to ' + theme.theme);
+  }, [theme])
+
   if (!running)
     setRunning(true);
   return (
-    <canvas id='game' />
+    <div>
+      <canvas id='game' />
+    </div>
   )
 }

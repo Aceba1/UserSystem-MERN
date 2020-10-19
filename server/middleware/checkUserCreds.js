@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const emailRegex = /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*$/i;
+const projection = {password: 1, username: 1, email: 1};
 
 const failedLogin = (res, message) => {
   return res.status(400).json({message});
@@ -17,15 +18,14 @@ module.exports = async (req, res, next) => {
     if (token) { // Could separate to new middleware (server), and tasked only when necessary (client)
       try {
         const {id} = jwt.verify(token, process.env.JWT_SECRET, {}); // Throws an exception if the token is invalid
-        
-        const user = await User.findById( id ); 
+        const user = await User.findById(id, projection); 
 
         if (user === null) {
           console.error(`\nLogin Failed: '${id}' Not In Use`);
           return failedLogin(res, "Could Not Find User");
         }
         req.id = user._id;
-        req.user = user.username;
+        req.user = {name: user.username, email: user.email};
   
         console.log("User login " + user.username + " " + user.email + " has passed validation by token");
         next() //if code execution reaches here, it is assumed the user has successfully logged in
@@ -50,7 +50,6 @@ module.exports = async (req, res, next) => {
     query[field] = c;
 
     const
-      projection = {password: 1, username: 2, email: 3}, 
       user = await User.findOne(
           query, 
           projection
@@ -73,7 +72,7 @@ module.exports = async (req, res, next) => {
     }
 
     req.id = user._id;
-    req.user = user.username;
+    req.user = {name: user.username, email: user.email};
 
 
     console.log("User login " + user.username + " " + user.email + " has passed validation");

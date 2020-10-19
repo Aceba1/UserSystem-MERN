@@ -81,6 +81,13 @@ body.light {
     color: #eee;
 }
 
+.warning-label {
+    white-space: pre-line;
+    color: red;
+    font-style: italic;
+    margin: 0 auto;
+}
+
 .Warning {
     transition: 250ms ease-in-out;
     /* animation: 200ms ease-out 0s 1 alternate both running warning-appear;  */

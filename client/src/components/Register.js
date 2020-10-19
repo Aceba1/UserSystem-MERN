@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Button from './Button'
 import Form from './Form'
-import { register } from '../utils/userInput'
-import { regReq } from '../utils/userRequest'
+import { register as registerInput } from '../utils/userInput'
+import { register as registerReq } from '../utils/userRequest'
+import { UserState } from '../contexts/UserState';
 
 export default function Register(props) {
+  const userState = useContext(UserState);
   return (
     <div>
       <h1>Register</h1>
@@ -12,10 +14,10 @@ export default function Register(props) {
         <Form
           id='register-form'
           title='Create an account'
-          inputs={register}
-          submitFunc={regReq}
+          inputs={registerInput}
+          request={registerReq}
         />
-        { props.loggedIn ? (
+        { userState.active ? (
           <div>
             <label>Already signed in!</label><br/>
             <Button 
